@@ -19,6 +19,7 @@ let secondNumber;
 let operator;
 
 const total = document.querySelector(".total");
+const currentInput = document.querySelector(".currentInput");
 const nums = document.querySelectorAll(".number");
 const ops = document.querySelectorAll(".operator");
 for (let num of nums){
@@ -36,14 +37,20 @@ for (let op of ops){
         if (firstNumber == undefined){
             firstNumber = total.textContent;
             operator = e.target.textContent
+            currentInput.textContent = firstNumber + ' ' + e.target.textContent;
             total.textContent = '';
-            console.log(firstNumber);
-            console.log(operator);
+        }
+        else if (secondNumber == undefined){
+            secondNumber = total.textContent;
+            currentInput.textContent += ' ' + secondNumber;
+            total.textContent = operate(parseFloat(firstNumber), parseFloat(secondNumber), operator);
+            firstNumber = total.textContent;
         }
         else{
-            secondNumber = total.textContent;
-            console.log(secondNumber);
-            total.textContent = operate(parseFloat(firstNumber), parseFloat(secondNumber), operator);
+            operator = e.target.textContent;
+            currentInput.textContent = firstNumber + ' ' + e.target.textContent;
+            total.textContent = '';
+            secondNumber = undefined;
         }
     })}
 
