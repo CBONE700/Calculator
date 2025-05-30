@@ -25,13 +25,31 @@ const total = document.querySelector(".total");
 const currentInput = document.querySelector(".currentInput");
 const nums = document.querySelectorAll(".number");
 const ops = document.querySelectorAll(".operator");
+const clear = document.querySelector(".clear");
+const del = document.querySelector(".delete");
+clear.addEventListener("click", () => {
+    firstNumber = undefined;
+    secondNumber = undefined;
+    operator = undefined;
+    total.textContent = '0';
+    currentInput.textContent = '';
+})
+del.addEventListener("click", () => {
+    total.textContent = total.textContent.slice(0, -1);
+    if (total.textContent == ''){
+        total.textContent = '0';
+    }
+})
+
 for (let num of nums){
     num.addEventListener("click", e => {
-        if (total.textContent == 0){
-            total.textContent = e.target.textContent;
-        }
-        else{
-            total.textContent += e.target.textContent;
+        if (operator != "="){
+            if (total.textContent == 0){
+                total.textContent = e.target.textContent;
+            }
+            else{
+                total.textContent += e.target.textContent;
+            }
         }
     })}
 
@@ -43,7 +61,7 @@ for (let op of ops){
             currentInput.textContent = firstNumber + ' ' + e.target.textContent;
             total.textContent = '0';
         }
-        else{
+        else if (firstNumber != "undefined"){
             secondNumber = total.textContent;
             total.textContent = operate(parseFloat(firstNumber), parseFloat(secondNumber), operator);
             operator = e.target.textContent;
