@@ -27,6 +27,8 @@ const nums = document.querySelectorAll(".number");
 const ops = document.querySelectorAll(".operator");
 const clear = document.querySelector(".clear");
 const del = document.querySelector(".delete");
+const dec = document.querySelector(".decimal");
+
 clear.addEventListener("click", () => {
     firstNumber = undefined;
     secondNumber = undefined;
@@ -41,10 +43,16 @@ del.addEventListener("click", () => {
     }
 })
 
+dec.addEventListener("click", () => {
+    if (!total.textContent.includes('.') && total.textContent.length < 10){
+        total.textContent += '.';
+    }
+})
+
 for (let num of nums){
     num.addEventListener("click", e => {
-        if (operator != "="){
-            if (total.textContent == 0){
+        if (operator != "=" && total.textContent.length < 10){
+            if (total.textContent == '0'){
                 total.textContent = e.target.textContent;
             }
             else{
