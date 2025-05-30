@@ -40,18 +40,23 @@ for (let op of ops){
             currentInput.textContent = firstNumber + ' ' + e.target.textContent;
             total.textContent = '';
         }
-        else if (secondNumber == undefined){
-            secondNumber = total.textContent;
-            currentInput.textContent += ' ' + secondNumber;
-            total.textContent = operate(parseFloat(firstNumber), parseFloat(secondNumber), operator);
-            firstNumber = total.textContent;
-        }
         else{
+            secondNumber = total.textContent;
+            total.textContent = operate(parseFloat(firstNumber), parseFloat(secondNumber), operator);
             operator = e.target.textContent;
-            currentInput.textContent = firstNumber + ' ' + e.target.textContent;
-            total.textContent = '';
-            secondNumber = undefined;
+            if (e.target.textContent == '='){
+                if (!currentInput.textContent.includes('=')){
+                    currentInput.textContent += ' ' + secondNumber + ' =';
+                    firstNumber = total.textContent;
+                }
+            }
+            else{
+                currentInput.textContent = total.textContent + ' ' + operator;
+                firstNumber = total.textContent;
+                total.textContent = '';
+            }
         }
+
     })}
 
 function operate(a, b, operator){
@@ -66,5 +71,8 @@ function operate(a, b, operator){
     }
     else if (operator == '÷'){
         return divide(a, b);
+    }
+    else{
+        return a;
     }
 }
