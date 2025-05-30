@@ -44,14 +44,14 @@ del.addEventListener("click", () => {
 })
 
 dec.addEventListener("click", () => {
-    if (!total.textContent.includes('.') && total.textContent.length < 10){
+    if (!total.textContent.includes('.') && total.textContent.length < 15){
         total.textContent += '.';
     }
 })
 
 for (let num of nums){
     num.addEventListener("click", e => {
-        if (operator != "=" && total.textContent.length < 10){
+        if (operator != "=" && total.textContent.length < 15){
             if (total.textContent == '0'){
                 total.textContent = e.target.textContent;
             }
