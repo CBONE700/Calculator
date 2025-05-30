@@ -11,6 +11,9 @@ function multiply(a, b){
 }
 
 function divide(a, b){
+    if (b == 0){
+        return "undefined";
+    }
     return a / b;
 }
 
@@ -38,7 +41,7 @@ for (let op of ops){
             firstNumber = total.textContent;
             operator = e.target.textContent
             currentInput.textContent = firstNumber + ' ' + e.target.textContent;
-            total.textContent = '';
+            total.textContent = '0';
         }
         else{
             secondNumber = total.textContent;
@@ -53,7 +56,7 @@ for (let op of ops){
             else{
                 currentInput.textContent = total.textContent + ' ' + operator;
                 firstNumber = total.textContent;
-                total.textContent = '';
+                total.textContent = '0';
             }
         }
 
