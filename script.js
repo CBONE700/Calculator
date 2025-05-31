@@ -1,20 +1,20 @@
 function add(a, b){
-    return a + b;
+    return Math.round((a + b) * 1000)/1000;
 }
 
 function subtract(a, b){
-    return a - b;
+    return Math.round((a - b) * 1000)/1000;
 }
 
 function multiply(a, b){
-    return a * b;
+    return Math.round((a * b) * 1000)/1000;
 }
 
 function divide(a, b){
     if (b == 0){
         return "undefined";
     }
-    return a / b;
+    return Math.round((a / b) * 1000)/1000;
 }
 
 let firstNumber;
@@ -33,18 +33,20 @@ clear.addEventListener("click", () => {
     firstNumber = undefined;
     secondNumber = undefined;
     operator = undefined;
-    total.textContent = '0';
+    total.textContent = '';
     currentInput.textContent = '';
 })
 del.addEventListener("click", () => {
-    total.textContent = total.textContent.slice(0, -1);
-    if (total.textContent == ''){
-        total.textContent = '0';
+    if (firstNumber != "undefined"){
+        total.textContent = total.textContent.slice(0, -1);
+        if (total.textContent == ''){
+            total.textContent = '';
+    }
     }
 })
 
 dec.addEventListener("click", () => {
-    if (!total.textContent.includes('.') && total.textContent.length < 15){
+    if (!total.textContent.includes('.') && total.textContent.length < 15 && firstNumber != "undefined"){
         total.textContent += '.';
     }
 })
@@ -52,7 +54,7 @@ dec.addEventListener("click", () => {
 for (let num of nums){
     num.addEventListener("click", e => {
         if (operator != "=" && total.textContent.length < 15){
-            if (total.textContent == '0'){
+            if (total.textContent == ''){
                 total.textContent = e.target.textContent;
             }
             else{
@@ -67,9 +69,9 @@ for (let op of ops){
             firstNumber = total.textContent;
             operator = e.target.textContent
             currentInput.textContent = firstNumber + ' ' + e.target.textContent;
-            total.textContent = '0';
+            total.textContent = '';
         }
-        else if (firstNumber != "undefined"){
+        else if (firstNumber != "undefined" && total.textContent != ''){
             secondNumber = total.textContent;
             total.textContent = operate(parseFloat(firstNumber), parseFloat(secondNumber), operator);
             operator = e.target.textContent;
@@ -82,15 +84,19 @@ for (let op of ops){
             else{
                 currentInput.textContent = total.textContent + ' ' + operator;
                 firstNumber = total.textContent;
-                total.textContent = '0';
+                total.textContent = '';
             }
+        }
+        else{
+            operator = e.target.textContent;
+            currentInput.textContent = firstNumber + ' ' + operator;
         }
 
     })}
 
 function operate(a, b, operator){
     if (operator == '+'){
-        return add(a, b);
+        add(a, b);
     }
     else if (operator == '-'){
         return subtract(a, b);
