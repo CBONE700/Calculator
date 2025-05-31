@@ -96,7 +96,7 @@ for (let op of ops){
 
 function operate(a, b, operator){
     if (operator == '+'){
-        add(a, b);
+        return add(a, b);
     }
     else if (operator == '-'){
         return subtract(a, b);
