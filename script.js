@@ -28,6 +28,16 @@ const ops = document.querySelectorAll(".operator");
 const clear = document.querySelector(".clear");
 const del = document.querySelector(".delete");
 const dec = document.querySelector(".decimal");
+const btns = document.querySelectorAll("button");
+
+for (let btn of btns){
+    btn.addEventListener("mouseover", (e) => {
+        e.target.style.filter = "brightness(0.75)";
+    })
+    btn.addEventListener("mouseout", (e) => {
+        e.target.style.filter = "brightness(1)";
+    })
+}
 
 clear.addEventListener("click", () => {
     firstNumber = undefined;
